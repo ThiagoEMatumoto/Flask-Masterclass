@@ -1,10 +1,11 @@
 from flask import Flask, render_template
+from flask_bootstrap import Bootstrap5
 from flask_sqlalchemy import SQLAlchemy
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///banco.db'
 app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
-
+bootstrap = Bootstrap5(app)
 db = SQLAlchemy(app)
 
 class User(db.Model):
@@ -21,7 +22,7 @@ class User(db.Model):
 def index():
     # Select * from users
     users= User.query.all()
-    return render_template('user.html', users=users)
+    return render_template("user.html", users=users)
 
 
 
